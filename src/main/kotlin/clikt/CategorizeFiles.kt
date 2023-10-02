@@ -1,7 +1,7 @@
-package utils
+package clikt
 
+import skuContext.RawEntry
 import com.github.ajalt.clikt.core.CliktCommand
-import com.github.ajalt.clikt.core.findOrSetObject
 import com.github.ajalt.clikt.core.requireObject
 import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.options.default
@@ -33,7 +33,7 @@ class CategorizeFiles : CliktCommand(help = "Categorize files based on the entri
     }
 
     override fun run() {
-        println(Entry.loadFile(File(config["logFile"] ?: "")))
+        println(RawEntry.loadFile(File(config["logFile"] ?: "")))
         listFiles(filesDir, recursive) {
             Files.readAttributes(FileSystems.getDefault().getPath(it.path), BasicFileAttributes::class.java).let { metadata ->
                 println(metadata.creationTime())
